@@ -86,6 +86,30 @@ const BlogList = () => {
             label: 'Programming',
             value: 'programming'
         },
+        {
+            label: 'Front-End',
+            value: 'front-end'
+        },
+        {
+            label: 'Back-End',
+            value: 'back-end'
+        },
+        {
+            label: 'Technologies',
+            value: 'technologies'
+        },
+        {
+            label: 'Tips & Tricks',
+            value: 'tips&tricks'
+        },
+        {
+            label: 'Hacks',
+            value: 'hacks'
+        },
+        {
+            label: 'Resources',
+            value: 'resources'
+        },
     ]
 
     const filterCate = (category) => {
