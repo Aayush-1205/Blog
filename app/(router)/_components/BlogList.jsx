@@ -9,6 +9,8 @@ const BlogList = () => {
     const [BlogList, setBlogList] = useState([])
     const [cateOrg, setCateOrg] = useState([])
     const [isOpen, setIsOpen] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerPage, setPostsPerPage] = useState(6)
 
     useEffect(() => {
         getAllBlog()
@@ -99,8 +101,19 @@ const BlogList = () => {
         getAllBlog()
     }
 
-    console.log(BlogList);
 
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = BlogList.slice(indexOfFirstPost, indexOfLastPost);
+
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(BlogList.length / postsPerPage); i++) {
+        pageNumbers.push(i);
+    }
+
+    console.log(currentPosts);
     return (
         <div className='p-5 bg-white rounded-lg mt-5'>
             <div className="flex items-center justify-between">
@@ -126,7 +139,7 @@ const BlogList = () => {
 
             {/* Blog List */}
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-                {BlogList.length > 0 ? BlogList.map((blog, index) => {
+                {currentPosts.length > 0 ? currentPosts.map((blog, index) => {
                     return <BlogItem key={index} blog={blog} />
                 })
                     : [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
@@ -135,6 +148,42 @@ const BlogList = () => {
                         </div>
                     })
                 }
+            </div>
+
+            <div className="blogpagination flex items-center justify-center my-8 text-black">
+                <button
+                className='bg-[#f0f0f0] border-none text-[#333] py-4 px-5 font-semibold mr-1 rounded-md cursor-pointer hover:bg-[#667eea] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed'
+                    onClick={() => paginate(1)}
+                    disabled={currentPage === 1}
+                    
+                >
+                    First
+                </button>
+                {pageNumbers
+                    .slice(
+                        Math.max(currentPage - 3, 0),
+                        Math.min(currentPage + 1, pageNumbers.length)
+                    )
+                    .map((number) => {
+                        return (
+                            <button
+                                key={number}
+                                onClick={() => paginate(number)}
+                                className={`${currentPage === number ? "active bg-[#667eea] text-white" : ""} bg-[#f0f0f0] border-none py-4 px-5 font-semibold mr-1 rounded-md cursor-pointer hover:bg-[#667eea] hover:text-white`}
+                                
+                            >
+                                {number}
+                            </button>
+                        );
+                    })}
+                <button
+                className='bg-[#f0f0f0] border-none text-[#333] py-4 px-5 font-semibold mr-1 rounded-md cursor-pointer hover:bg-[#667eea] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed'
+                    onClick={() => paginate(pageNumbers.length)}
+                    disabled={currentPage === pageNumbers.length}
+                  
+                >
+                    Last
+                </button>
             </div>
         </div>
     )

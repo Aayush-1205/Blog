@@ -4,10 +4,10 @@ import { Header, SideNav } from "./_components";
 const layout = ({ children }) => {
   return (
     <div>
-      <div className="hidden lg:block lg:w-64 fixed">
+      <div className="hidden lg:block lg:w-52 fixed">
         <SideNav />
       </div>
-      <div className="lg:ml-64">
+      <div className="lg:ml-52">
         <Header />
         {children}
       </div>
