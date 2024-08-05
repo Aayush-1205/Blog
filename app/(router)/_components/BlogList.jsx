@@ -25,7 +25,7 @@ const BlogList = () => {
 
     const tags = [
         {
-            label: 'html',
+            label: 'Html',
             value: 'html'
         },
         {

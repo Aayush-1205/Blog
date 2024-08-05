@@ -1,9 +1,68 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import VideoPlayer from './VideoPlayer'
-import Markdown from 'react-markdown'
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { allyDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import remarkGfm from "remark-gfm";
 
 const BlogDescription = ({ blogsInfo }) => {
-// console.log(blogsInfo?.description[0]);
+    // console.log(blogsInfo?.description[0]);
+
+    const Code = ({ node, inline, className, children, ...props }) => {
+        const match = /language-(\w+)/.exec(className || "");
+
+        const [copied, setCopied] = useState();
+        // copy code
+        const copyCode = () => {
+        };
+
+        if (inline) {
+            return <code>{children}</code>;
+        } else if (match) {
+            return (
+                <div style={{ position: "relative" }}>
+                    <SyntaxHighlighter
+                        style={allyDark}
+                        language={match[1]}
+                        PreTag="pre"
+                        {...props}
+                        codeTagProps={{
+                            style: {
+                                padding: "0",
+                                borderRadius: "5px",
+                                overflowX: "auto",
+                                whiteSpace: "pre-wrap",
+                            },
+                        }}
+                    >
+                        {String(children).replace(/\n$/, "")}
+                    </SyntaxHighlighter>
+                    <button
+                        style={{
+                            position: "absolute",
+                            top: "0",
+                            right: "0",
+                            zIndex: "1",
+                            background: "#3d3d3d",
+                            color: "#fff",
+                            padding: "10px",
+                        }}
+                        onClick={copyCode}
+                    >
+                        {copied ? "Copied" : "Copy code"}
+                    </button>
+                </div>
+            );
+        } else {
+            return (
+                <code className="md-post-code" {...props}>
+                    {children}
+                </code>
+            );
+        }
+    };
+
     return (
         <div>
             <h2 className='text-[1.5rem] font-semibold'>{blogsInfo?.title}</h2>
@@ -16,9 +75,13 @@ const BlogDescription = ({ blogsInfo }) => {
             {/* <h2 className="mt-5 text-[1rem] font-semibold"></h2> */}
 
             <div>
-                <Markdown className='text-[0.8rem] font-medium leading-4 mt-2'>
+                <ReactMarkdown
+                    className='text-[0.8rem] font-medium leading-4 mt-2'
+                    remarkPlugins={[remarkGfm]}
+                    components={{ code: Code }}
+                >
                     {blogsInfo?.description[0]}
-                </Markdown>
+                </ReactMarkdown>
             </div>
         </div>
     )

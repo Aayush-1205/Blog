@@ -14,18 +14,18 @@ const SideNav = () => {
             icon: Book,
             link: "/blogs"
         },
-        {
-            id: 2,
-            name: "Tags",
-            icon: Tag,
-            link: "/tags"
-        },
-        {
-            id: 3,
-            name: "Categories",
-            icon: Book,
-            link: "/categories"
-        },
+        // {
+        //     id: 2,
+        //     name: "Tags",
+        //     icon: Tag,
+        //     link: "/tags"
+        // },
+        // {
+        //     id: 3,
+        //     name: "Categories",
+        //     icon: Book,
+        //     link: "/categories"
+        // },
     ]
 
     const path = usePathname()

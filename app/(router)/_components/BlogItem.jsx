@@ -13,10 +13,12 @@ const BlogItem = ({ blog }) => {
   return (
     <Link href={`/blog/${blog?.blogUrl}`}>
       <div className='border rounded-xl shadow-md mt-4 cursor-pointer hover:shadow-lg hover:shadow-primary/50'>
-        <Image src={blog?.banner?.url} width={500} height={180} className='rounded-t-xl' alt='Banner' />
+        <Image src={blog?.banner?.url} width={500} height={180} className='rounded-t-xl h-48 w-full object-cover
+        ' alt='Banner' />
 
         <div className="p-2">
           <h2 className="font-medium">{blog?.title}</h2>
+          <hr className='my-1' />
           <p className="text-[0.8rem] text-gray-700">{blog?.subTitle}</p>
           <p className="text-[0.7rem] text-gray-500">{date}</p>
         </div>
