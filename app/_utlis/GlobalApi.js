@@ -58,13 +58,16 @@ const getBlogById = async (blogId) => {
 const getBlogBySearch = async (searchById) => {
   const query =
     gql`
-    query MyQuery {
-      blogDoms(where: { _search: "` +
+      query MyQuery {
+  blogDoms(where: {_search: "` +
     searchById +
-    `" }) {
-        id
-      }
-    }
+    `"}) {
+    id
+    title
+    subTitle
+    blogUrl
+  }
+}
   `;
   const result = await request(MASTER_URL, query);
   return result;
