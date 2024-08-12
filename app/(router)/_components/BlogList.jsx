@@ -149,13 +149,25 @@ const BlogList = () => {
                     </button>
 
 
-                    {isOpen && <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <div class="py-1">
-                            {tags.map((t, i) => {
-                                return <p key={i} onClick={() => filterCate(t.value)} class="block px-4 py-2 text-sm text-gray-700 cursor-pointer">{t.label}</p>
-                            })}
+                    {isOpen && (
+                        <div
+                            class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none max-h-80 overflow-y-auto"
+                        >
+                            <div class="py-1">
+                                {tags.map((t, i) => {
+                                    return (
+                                        <p
+                                            key={i}
+                                            onClick={() => filterCate(t.value)}
+                                            class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-slate-200"
+                                        >
+                                            {t.label}
+                                        </p>
+                                    );
+                                })}
+                            </div>
                         </div>
-                    </div>}
+                    )}
                     <BiReset onClick={cancelFilter} size={22} className='cursor-pointer' />
                 </div>
 
@@ -176,10 +188,10 @@ const BlogList = () => {
 
             <div className="blogpagination flex items-center justify-center my-8 text-black">
                 <button
-                className='bg-[#f0f0f0] border-none text-[#333] py-4 px-5 font-semibold mr-1 rounded-md cursor-pointer hover:bg-[#667eea] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed'
+                    className='bg-[#f0f0f0] border-none text-[#333] py-4 px-5 font-semibold mr-1 rounded-md cursor-pointer hover:bg-[#667eea] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed'
                     onClick={() => paginate(1)}
                     disabled={currentPage === 1}
-                    
+
                 >
                     First
                 </button>
@@ -194,17 +206,17 @@ const BlogList = () => {
                                 key={number}
                                 onClick={() => paginate(number)}
                                 className={`${currentPage === number ? "active bg-[#667eea] text-white" : ""} bg-[#f0f0f0] border-none py-4 px-5 font-semibold mr-1 rounded-md cursor-pointer hover:bg-[#667eea] hover:text-white`}
-                                
+
                             >
                                 {number}
                             </button>
                         );
                     })}
                 <button
-                className='bg-[#f0f0f0] border-none text-[#333] py-4 px-5 font-semibold mr-1 rounded-md cursor-pointer hover:bg-[#667eea] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed'
+                    className='bg-[#f0f0f0] border-none text-[#333] py-4 px-5 font-semibold mr-1 rounded-md cursor-pointer hover:bg-[#667eea] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed'
                     onClick={() => paginate(pageNumbers.length)}
                     disabled={currentPage === pageNumbers.length}
-                  
+
                 >
                     Last
                 </button>

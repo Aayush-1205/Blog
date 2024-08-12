@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, SideNav } from "./_components";
+import { Header, ScrollToTop, SideNav } from "./_components";
 
 const layout = ({ children }) => {
   return (
@@ -10,6 +10,7 @@ const layout = ({ children }) => {
       <div className="lg:ml-52">
         <Header />
         {children}
+        <ScrollToTop />
       </div>
     </div>
   );
