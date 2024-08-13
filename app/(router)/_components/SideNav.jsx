@@ -38,7 +38,7 @@ const SideNav = () => {
             {/* <div className="bg-black rounded-lg">
         <Image src='/logo.png' alt='logo' width={100} height={100} />
         </div> */}
-            <h1 className='text-3xl text-primary font-semibold'>BlogDom</h1>
+            <Link href={'/'} className='text-3xl text-primary font-semibold'>BlogDom</Link>
 
             {/* Menu */}
             <div className='mt-4'>

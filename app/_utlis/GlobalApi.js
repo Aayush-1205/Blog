@@ -66,6 +66,9 @@ const getBlogBySearch = async (searchById) => {
     title
     subTitle
     blogUrl
+    banner {
+      url
+    }
   }
 }
   `;

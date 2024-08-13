@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import GlobalApi from '@/app/_utlis/GlobalApi';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const SearchById = () => {
     const [searchId, setSearchId] = useState('');
@@ -33,7 +34,7 @@ const SearchById = () => {
         }
     }, [searchId]);
 
-    // console.log(searchResults);
+    console.log(searchResults);
 
     return (
         <div className="flex gap-2 border p-2 relative rounded-md">
@@ -47,14 +48,17 @@ const SearchById = () => {
                 className='outline-none'
             />
             {isOpen && searchResults && (
-                <div className="absolute top-10 left-0 bg-white w-96 text-black p-2 rounded-md shadow">
+                <div onClick={() => setIsOpen(!isOpen)} className="absolute top-10 left-0 bg-white lg:w-[33rem] text-black p-2 rounded-md shadow">
                     {searchResults?.blogDoms?.map((result, index) => {
                         return <>
-                            <div key={index} className="py-2">
+                            <Link href={`/blog/${result.blogUrl}`} key={index} className="py-2 px-4 flex items-center gap-4 cursor-pointer hover:bg-black/20">
+                                <div className='h-12 overflow-hidden'>
+                                    <Image src={result?.banner?.url} width={100} height={50} alt='img' className='object-cover object-center' />
+                                </div>
+
                                 {/* Display the result data here */}
-                                <Link onClick={cancelSearch} href={`/blog/${result.blogUrl}`} className="text-lg font-bold">{result.title}</Link>
-                            </div>
-                            <hr />
+                                <Link onClick={cancelSearch} href={`/blog/${result.blogUrl}`} className="text-lg font-semibold">{result.title}</Link>
+                            </Link>
                         </>
                     })}
                 </div>

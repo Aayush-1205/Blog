@@ -8,7 +8,8 @@ const BlogList = () => {
 
     const [BlogList, setBlogList] = useState([])
     const [cateOrg, setCateOrg] = useState([])
-    const [isOpen, setIsOpen] = useState(false)
+    const [isTagOpen, setIsTagOpen] = useState(false)
+    const [isTopicOpen, setIsTopicOpen] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostsPerPage] = useState(6)
 
@@ -83,16 +84,52 @@ const BlogList = () => {
             value: 'figma'
         },
         {
+            label: 'Tech',
+            value: 'tech'
+        }
+        
+    ]
+
+    const topics = [
+        {
+            label: 'Html, Css & JavaScript',
+            value: 'htmlcssjavascript'
+        },
+        {
+            label: 'React.js',
+            value: 'reactJs'
+        },
+        {
+            label: 'Next.js',
+            value: 'nextJs'
+        },
+        {
+            label: 'Git',
+            value: 'git'
+        },
+        {
+            label: 'GitHub',
+            value: 'github'
+        },
+        {
+            label: 'TailwindCss',
+            value: 'tailwindCss'
+        },
+        {
+            label: 'DataBase',
+            value: 'database'
+        },
+        {
             label: 'Programming',
             value: 'programming'
         },
         {
             label: 'Front-End',
-            value: 'front-end'
+            value: 'frontenddevelopment'
         },
         {
             label: 'Back-End',
-            value: 'back-end'
+            value: 'backenddevelopment'
         },
         {
             label: 'Technologies',
@@ -110,14 +147,27 @@ const BlogList = () => {
             label: 'Resources',
             value: 'resources'
         },
+        {
+            label: 'Designs',
+            value: 'designs'
+        },
     ]
 
-    const filterCate = (category) => {
+    const filterTag = (category) => {
         const filterList = cateOrg.filter(cate => {
             return cate.tags.includes(category);
         })
         // console.log(filterList);
-        setIsOpen(false)
+        setIsTagOpen(false)
+        setBlogList(filterList)
+    }
+    const filterTopic = (category) => {
+        const filterList = cateOrg.filter(cate => {
+            return cate.topics.includes(category);
+            // console.log(category);
+        })
+        console.log(filterList);
+        setIsTopicOpen(false)
         setBlogList(filterList)
     }
 
@@ -137,29 +187,51 @@ const BlogList = () => {
         pageNumbers.push(i);
     }
 
-    console.log(currentPosts);
+    // console.log(currentPosts);
     return (
         <div className='p-5 bg-white rounded-lg mt-5'>
             <div className="flex items-center justify-between">
                 <h2 className="text-xl font-bold text-primary">Blogs</h2>
-                <div class="relative flex items-center gap-2 text-left">
+                <div className="relative flex items-center gap-2 text-left">
 
-                    <button onClick={() => setIsOpen(!isOpen)} type="button" class="inline-flex w-fit justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                        Filter
+                    <button onClick={() => setIsTagOpen(!isTagOpen)} type="button" className="inline-flex w-fit justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                        Tags
+                    </button>
+                    <button onClick={() => setIsTopicOpen(!isTopicOpen)} type="button" className="inline-flex w-fit justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                        Topics
                     </button>
 
 
-                    {isOpen && (
+                    {isTagOpen && (
                         <div
-                            class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none max-h-80 overflow-y-auto"
+                            className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none max-h-80 overflow-y-auto"
                         >
-                            <div class="py-1">
+                            <div className="py-1">
                                 {tags.map((t, i) => {
                                     return (
                                         <p
                                             key={i}
-                                            onClick={() => filterCate(t.value)}
-                                            class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-slate-200"
+                                            onClick={() => filterTag(t.value)}
+                                            className="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-slate-200"
+                                        >
+                                            {t.label}
+                                        </p>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    )}
+                    {isTopicOpen && (
+                        <div
+                            className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none max-h-80 overflow-y-auto"
+                        >
+                            <div className="py-1">
+                                {topics.map((t, i) => {
+                                    return (
+                                        <p
+                                            key={i}
+                                            onClick={() => filterTopic(t.value)}
+                                            className="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-slate-200"
                                         >
                                             {t.label}
                                         </p>

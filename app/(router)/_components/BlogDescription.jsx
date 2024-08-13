@@ -76,16 +76,16 @@ const BlogDescription = ({ blogsInfo }) => {
             {/* Description */}
             {/* <h2 className="mt-5 text-[1rem] font-semibold"></h2> */}
 
-            <div>
+        
                 <ReactMarkdown
-                    className='text-[0.8rem] font-medium leading-4 mt-2 prose prose-h2:bg-red-300 prose-h3:bg-yellow-300 prose-h1:bg-primary/65'
+                    className='text-[0.8rem] font-medium leading-4 mt-2 lg:w-[34rem] prose'
                     remarkPlugins={[remarkGfm]}
                     rehypePlugins={[rehypeSlug, [rehypeAutolinkHeadings, {behavior: "append"}]]}
                     components={{ code: Code }}
                 >
                     {blogsInfo?.description[0]}
                 </ReactMarkdown>
-            </div>
+            
         </div>
     )
 }
