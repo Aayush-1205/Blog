@@ -12,6 +12,7 @@ const getAllBlogDom = async () => {
         blogUrl
         title
         tags
+        topics
         subTitle
         description
         createdAt

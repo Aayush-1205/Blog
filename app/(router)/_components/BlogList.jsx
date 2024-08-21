@@ -246,7 +246,7 @@ const BlogList = () => {
             </div>
 
             {/* Blog List */}
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+            <div onClick={() => {setIsTagOpen(false); setIsTopicOpen(false)}} className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
                 {currentPosts.length > 0 ? currentPosts.map((blog, index) => {
                     return <BlogItem key={index} blog={blog} />
                 })

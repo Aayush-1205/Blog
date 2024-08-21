@@ -34,7 +34,7 @@ const SearchById = () => {
         }
     }, [searchId]);
 
-    console.log(searchResults);
+    // console.log(searchResults);
 
     return (
         <div className="flex gap-2 border p-2 relative rounded-md">
